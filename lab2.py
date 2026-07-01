@@ -191,9 +191,26 @@ def main(screen):
         # BONUS: Can you figure out how to select one line up/down by yourself?
 
         elif key == curses.KEY_UP:
-            display = ...
+
+            display = text[:cursor] + "|" + text[cursor:]
         elif key == curses.KEY_DOWN:
-            display = ...
+            count = 0
+            char = text[cursor]
+            space_count = 0
+            while char != "\n" or (cursor - count) == 0:
+                space_count += 1
+                count += 1
+                char = text[cursor - count]
+            i = 0
+            while char != "\n":
+                if (cursor + i) == (len(text) - 1):
+                    break
+            if (cursor + i) == (len(text) - 1):
+                continue
+            else:
+                cursor += i
+                cursor += space_count
+            display = text[:cursor] + "|" + text[cursor:]
 
 
 curses.wrapper(main)
